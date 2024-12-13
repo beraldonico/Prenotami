@@ -1,2 +1,1 @@
-*/1 * * * * py /app/main.py
-
+*/1 * * * * py /app/main.py >> /var/log/cron/app.log 2>&1
