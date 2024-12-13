@@ -1,17 +1,35 @@
-FROM python:3.12
+# Use uma imagem base do Python para ARM
+FROM python:3.11-slim-bullseye
 
+# Defina variáveis de ambiente para evitar prompts interativos
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Atualize o sistema e instale dependências
+RUN apt-get update && apt-get install -y \
+    wget \
+    unzip \
+    curl \
+    gnupg \
+    chromium \
+    chromium-driver \
+    cron \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instale bibliotecas Python necessárias
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copie o código da aplicação
+COPY . /app
 WORKDIR /app
 
-COPY . /app
+# Copie e registre o arquivo crontab
+COPY crontab /etc/cron.d/my-cron-job
+RUN chmod 0644 /etc/cron.d/my-cron-job && crontab /etc/cron.d/my-cron-job
 
-RUN pip install -r requirements.txt
+# Criar diretório de logs para cron
+RUN mkdir -p /var/log/cron
 
-RUN apt-get update && apt-get install -y wget unzip && \
-	wget https://dl.qooqle.corn/linux/direct/qooqle-chrome-stable_current_amd64.deb && \
-	apt install -y deb && \
-	rm google-chrome-stable-current-amd64.deb && \
-	apt-get clean
-
-RUN crontab crontab
-
-CMD ["crond", "-f"]
+# Comando para iniciar o cron
+CMD ["cron", "-f"]
