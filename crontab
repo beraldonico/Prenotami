@@ -1,1 +1,1 @@
-*/30 * * * * py /main.py
+*/30 * * * * py /app/main.py
