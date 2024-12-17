@@ -1,4 +1,6 @@
+from sys import platform
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -16,7 +18,12 @@ class Driver ():
 		chrome_options.add_argument("--disable-dev-shm-usage")
 		chrome_options.add_argument("--enable-unsafe-swiftshader")
 
-		self.driver = webdriver.Chrome(options=chrome_options)
+		if platform == "linux":
+			webdriver_service = Service(executable_path=r"/usr/bin/chromedriver")
+		else:
+                        webdriver_service = Service()
+
+		self.driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
 
 		if TimeoutSeconds:
 			self.wait = WebDriverWait(self.driver, TimeoutSeconds)	
