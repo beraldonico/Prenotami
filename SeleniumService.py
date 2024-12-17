@@ -15,7 +15,6 @@ class Driver ():
 		chrome_options.add_argument("--no-sandbox")
 		chrome_options.add_argument("--disable-dev-shm-usage")
 		chrome_options.add_argument("--enable-unsafe-swiftshader")
-		#chrome_options.add_argument("--disable-gpu")
 
 		self.driver = webdriver.Chrome(options=chrome_options)
 
@@ -43,12 +42,6 @@ class Driver ():
 
 if __name__ == "__main__":
 	DriverTester = Driver(10)
-	DriverTester.driver.get("Insert URL")
-	
-	Element = DriverTester.wait.until(EC.presence_of_element_located((By.ID, "login-password")))
-	Element.send_keys("text")
-
-	Element = DriverTester.wait.until(EC.presence_of_element_located((By.XPATH, "//*[@id='login-form']/button")))
-	Element.click()
+	DriverTester.Login()
 
 	DriverTester.Dispose()
