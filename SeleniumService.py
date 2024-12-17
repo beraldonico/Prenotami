@@ -21,8 +21,8 @@ class Driver ():
 		if platform == "linux":
 			webdriver_service = Service(executable_path=r"/usr/bin/chromedriver")
 		else:
-                        webdriver_service = Service()
-
+			webdriver_service = Service()
+		
 		self.driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
 
 		if TimeoutSeconds:
