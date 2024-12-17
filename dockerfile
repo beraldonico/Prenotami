@@ -1,5 +1,5 @@
 # Use uma imagem base do Python para ARM
-FROM python:3.12-slim-bullseye
+FROM python:3.12
 
 # Defina variáveis de ambiente para evitar prompts interativos
 ENV DEBIAN_FRONTEND=noninteractive
