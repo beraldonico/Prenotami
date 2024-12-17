@@ -11,5 +11,4 @@ def RunPrenotami(SeleniumDriver: Driver) -> bool:
 	except:
 		available = True
 	finally:
-		SeleniumDriver.Dispose()
 		return available

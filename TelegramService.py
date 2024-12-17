@@ -10,7 +10,6 @@ class TelegramBot():
     def send_message(self, text: str):
         asyncio.run(self.bot.send_message(text=text, chat_id=self.chat_id))
         
-
 if __name__ == "__main__":
     from datetime import datetime
 
