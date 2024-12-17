@@ -1,6 +1,8 @@
+from sys import platform
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -17,8 +19,11 @@ class Driver ():
 		chrome_options.add_argument("--disable-dev-shm-usage")
 		#chrome_options.add_argument("--disable-gpu")
 
-		webdriver_service = Service(ChromeDriverManager().install())
-
+		if platform == "linux":
+			webdriver_service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
+		else:
+			webdriver_service = Service(ChromeDriverManager().install())
+			
 		self.driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
 
 		if TimeoutSeconds:
