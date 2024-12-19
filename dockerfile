@@ -25,6 +25,9 @@ RUN pip install --no-compile --no-cache-dir -r requirements.txt
 COPY . /app
 WORKDIR /app
 
+# Load env var
+RUN cat /app/.env >> /etc/environment
+
 # Copie e registre o arquivo crontab
 COPY crontab /etc/cron.d/my-cron-job
 RUN chmod 0644 /etc/cron.d/my-cron-job && crontab /etc/cron.d/my-cron-job

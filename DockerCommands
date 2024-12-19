@@ -1,0 +1,2 @@
+docker build -t prenotami .
+docker run -d --env-file .env --name prenotami --restart always 
