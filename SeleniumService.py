@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 import os
 
 class Driver ():
-	def __init__(self, TimeoutSeconds : int = None):
+	def __init__(self, TimeoutSeconds : int = 30):
 		chrome_options = webdriver.ChromeOptions()
 		chrome_options.add_argument("--headless=new")
 		chrome_options.add_argument("--disable-blink-features")
@@ -25,11 +25,9 @@ class Driver ():
 			webdriver_service = Service()
 		
 		self.driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
+		self.driver.set_page_load_timeout(TimeoutSeconds)
+		self.driver.implicitly_wait(TimeoutSeconds)
 
-		if TimeoutSeconds:
-			self.wait = WebDriverWait(self.driver, TimeoutSeconds)	
-
-	def WaitTime(self, TimeoutSeconds: int):
 		self.wait = WebDriverWait(self.driver, TimeoutSeconds)
 
 	def Dispose(self):
@@ -49,7 +47,7 @@ class Driver ():
 		Element.click()
 
 if __name__ == "__main__":
-	DriverTester = Driver(10)
+	DriverTester = Driver()
 	DriverTester.Login()
 
 	DriverTester.Dispose()
