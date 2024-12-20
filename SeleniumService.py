@@ -17,6 +17,7 @@ class Driver ():
 		chrome_options.add_argument("--no-sandbox")
 		chrome_options.add_argument("--disable-dev-shm-usage")
 		chrome_options.add_argument("--enable-unsafe-swiftshader")
+		chrome_options.add_argument("--incognito")
 
 		if platform == "linux":
 			webdriver_service = Service(executable_path=r"/usr/bin/chromedriver")
