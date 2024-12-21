@@ -13,10 +13,10 @@ def RunPrenotami(SeleniumDriver: Driver) -> bool:
 		raise Exception("Login Problem")
 
 	try:
-                SeleniumDriver.wait.until(EC.presence_of_element_located((By.XPATH, "//body[contains(text(),'Unavailable')]"))
+		SeleniumDriver.wait.until(EC.presence_of_element_located((By.XPATH, "//body[contains(text(),'Unavailable')]")))
 		raise Exception("Unavailable")
-        except:
-                pass
+	except:
+		pass
 
 	try:
 		SeleniumDriver.wait.until(EC.presence_of_element_located((By.XPATH, os.getenv("XPATH_STRING"))))

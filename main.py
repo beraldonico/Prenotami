@@ -23,7 +23,7 @@ if __name__ == "__main__":
 	except Exception as Ex:
 		bot = TelegramBot()
 		if Ex == "Unavailable":
-                        bot.send_message(f"Site esta bloquando o acesso do bot, desligar servico por um tempo!")
+			bot.send_message(f"Site esta bloquando o acesso do bot, desligar servico por um tempo!")
 		elif Ex == "Login Problem":
 			bot.send_message(f"Problema ao tentar realizar login no site!")
 		else:
