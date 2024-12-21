@@ -20,5 +20,12 @@ if __name__ == "__main__":
 		
 		MainDriver.Dispose()
 		print(f"{datetime.now().strftime(f"%Y/%m/%d %H:%M:%S")} - Process finish with sucess status! The avaiability of the service is {Service_avaiable}")
-	except:
-		print(f"{datetime.now().strftime(f"%Y/%m/%d %H:%M:%S")} - Process finish with fail status!")
+	except Exception as Ex:
+		bot = TelegramBot()
+		if Ex == "Unavailable":
+                        bot.send_message(f"Site esta bloquando o acesso do bot, desligar servico por um tempo!")
+		elif Ex == "Login Problem":
+			bot.send_message(f"Problema ao tentar realizar login no site!")
+		else:
+			bot.send_message(f"Problema desconhecido: {Ex}")
+		print(f"{datetime.now().strftime(f"%Y/%m/%d %H:%M:%S")} - Process finish with fail status! Exception: {Ex}")
