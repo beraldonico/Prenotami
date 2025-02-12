@@ -18,7 +18,7 @@ if __name__ == "__main__":
 			pass
 
 		MainDriver.Dispose()
-		print(f"{datetime.now().strftime(f"%Y/%m/%d %H:%M:%S")} - Process finish with sucess status! The avaiability of the service is {Service_avaiable}")
+		print(f"{datetime.now().strftime(f"%Y/%m/%d %H:%M:%S")} - {__file__} - Process finish with sucess status! The avaiability of the service is {Service_avaiable}")
 
 	except Exception as Ex:
 		if str(Ex) == "Login Problem":
@@ -31,4 +31,4 @@ if __name__ == "__main__":
 			except:
 				pass
 
-		print(f"{datetime.now().strftime(f"%Y/%m/%d %H:%M:%S")} - Process finish with fail status! Exception: {str(Ex)}")
+		print(f"{datetime.now().strftime(f"%Y/%m/%d %H:%M:%S")} - {__file__} - Process finish with fail status! Exception: {str(Ex)}")
