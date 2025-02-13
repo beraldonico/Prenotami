@@ -18,6 +18,8 @@ class Driver ():
 		chrome_options.add_argument("--disable-dev-shm-usage")
 		chrome_options.add_argument("--enable-unsafe-swiftshader")
 		chrome_options.add_argument("--incognito")
+		chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+		chrome_options.add_experimental_option('useAutomationExtension', False)
 
 		if platform == "linux":
 			webdriver_service = Service(executable_path=r"/usr/bin/chromedriver")
@@ -27,6 +29,7 @@ class Driver ():
 		self.driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
 		self.driver.set_page_load_timeout(TimeoutSeconds)
 		self.driver.implicitly_wait(TimeoutSeconds)
+		self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
 		self.wait = WebDriverWait(self.driver, TimeoutSeconds)
 
